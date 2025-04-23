@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:targetx/onboarding/Onboarding_Screen.dart';
-import 'package:targetx/sections/dasda.dart';
 import 'package:targetx/splash/splash_screen.dart';
 
 void main() {
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  HomePage(),
+      home:  const SplashScreen(),
     );
   }
 }
