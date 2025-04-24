@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:targetx/favourite/favorites_screen.dart';
-import 'package:targetx/sections/home_screen.dart';
+import 'package:targetx/home/HomeScreen.dart';
 import 'package:targetx/sections/sections_screen.dart';
 
+import '../cart/CartScreen.dart';
 import '../profile/Profile_Screen.dart';
 
-
 class LayoutScreen extends StatefulWidget {
+  const LayoutScreen({super.key});
+
   @override
   _LayoutScreenState createState() => _LayoutScreenState();
 }
@@ -14,14 +17,9 @@ class LayoutScreen extends StatefulWidget {
 class _LayoutScreenState extends State<LayoutScreen> {
   int _currentIndex = 0;
   final List<Widget> _screens = [
-    HomeSectionScreen(),
-    FavoritesScreen(favoriteItems: [
-      {"name": "Smartphone", "price": "8500", "image": "assets/images/phone.png","rating":"4.5"},
-      {"name": "Laptop", "price": "15000", "image": "assets/images/laptop.png","rating":"4.5"},
-      {"name": "Headphones", "price": "1200", "image": "assets/images/headphones.png","rating":"4.5"},
-      {"name": "Smart Watch", "price": "3000", "image": "assets/images/watch.png","rating":"4.5"},
-    ]),
-    SectionsScreen(),
+    HomeScreen(),
+    FavoritesScreen(),
+    CartScreen(),
     ProfileScreen(),
   ];
 
@@ -31,11 +29,51 @@ class _LayoutScreenState extends State<LayoutScreen> {
     });
   }
 
-  final List<BottomNavigationBarItem> _items = const [
-    BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-    BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-    BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
-    BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+  final List<BottomNavigationBarItem> _items = [
+    BottomNavigationBarItem(
+      icon: SvgPicture.asset("assets/images/ic_home.svg"),
+      label: 'Home',
+      activeIcon: SvgPicture.asset(
+        "assets/images/ic_home.svg",
+        colorFilter: const ColorFilter.mode(
+          Color(0xFF413B99),
+          BlendMode.srcIn,
+        ),
+      ),
+    ),
+    BottomNavigationBarItem(
+      icon: SvgPicture.asset("assets/images/ic_favorite.svg"),
+      label: 'Favorite',
+      activeIcon: SvgPicture.asset(
+        "assets/images/ic_favorite.svg",
+        colorFilter: const ColorFilter.mode(
+          Color(0xFF413B99),
+          BlendMode.srcIn,
+        ),
+      ),
+    ),
+    BottomNavigationBarItem(
+      icon: SvgPicture.asset("assets/images/ic_cart.svg"),
+      label: 'Cart',
+      activeIcon: SvgPicture.asset(
+        "assets/images/ic_cart.svg",
+        colorFilter: const ColorFilter.mode(
+          Color(0xFF413B99),
+          BlendMode.srcIn,
+        ),
+      ),
+    ),
+    BottomNavigationBarItem(
+      icon: SvgPicture.asset("assets/images/ic_profile.svg"),
+      label: 'Profile',
+      activeIcon: SvgPicture.asset(
+        "assets/images/ic_profile.svg",
+        colorFilter: const ColorFilter.mode(
+          Color(0xFF413B99),
+          BlendMode.srcIn,
+        ),
+      ),
+    ),
   ];
 
   @override
@@ -46,7 +84,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
         currentIndex: _currentIndex,
         items: _items,
         onTap: _onTabTapped,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: const Color(0xFF413B99),
         unselectedItemColor: Colors.grey,
       ),
     );

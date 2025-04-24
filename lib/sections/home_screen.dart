@@ -73,7 +73,7 @@ class _HomeSectionScreenState extends State<HomeSectionScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => FavoritesScreen(favoriteItems: favoriteItems),
+                  builder: (_) => const FavoritesScreen(),
                 ),
               );
             },

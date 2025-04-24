@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'package:targetx/edit_profile/EditProfileScreen.dart';
 
 import '../settings/SettingsScreen.dart';
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +65,8 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 30,
-                          backgroundImage: AssetImage(
-                              'assets/images/user.jpg'), // Replace with your image
+                          backgroundImage:
+                              AssetImage('assets/images/user_avatar.png'),
                         ),
                         SizedBox(width: 16),
                         Column(
@@ -91,21 +92,31 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: const Color(0xFFd9d9d9)),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    child: const Center(
-                      child: Text(
-                        'Edit profile',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EditProfileScreen(initialName: "Omar Ali", initialPhone: "1234123123"),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: const Color(0xFFd9d9d9)),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: const Center(
+                        child: Text(
+                          'Edit profile',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),
@@ -181,3 +192,5 @@ class _ProfileItem extends StatelessWidget {
     );
   }
 }
+
+

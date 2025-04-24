@@ -114,3 +114,5 @@ app.*.symbols
 /packages/flutter/coverage/
 version
 analysis_benchmark.json
+pubspec.lock
+android/targetx_android.iml

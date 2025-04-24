@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../profile/LanguageBottomSheet.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
@@ -35,7 +37,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   CircleAvatar(
                     radius: 20,
                     backgroundColor: Colors.grey.shade200,
-                    child: const Icon(Icons.arrow_forward_ios, color: Colors.black),
+                    child: const Icon(
+                        Icons.arrow_forward_ios, color: Colors.black),
                   ),
                 ],
               ),
@@ -58,18 +61,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: Icons.notifications,
                     label: 'Notifications',
                     value: isNotificationEnabled,
-                    onChanged: (val) => setState(() => isNotificationEnabled = val),
+                    onChanged: (val) =>
+                        setState(() => isNotificationEnabled = val),
                   ),
 
                   const SizedBox(height: 12),
 
                   // Navigation items
-                  const _SettingsNavItem(icon: Icons.language, label: 'the language'),
-                  const _SettingsNavItem(icon: Icons.lock_outline, label: 'change password'),
-                  const _SettingsNavItem(icon: Icons.phone, label: 'Change phone'),
-                  const _SettingsNavItem(icon: Icons.lock, label: 'Terms and Conditions'),
-                  const _SettingsNavItem(icon: Icons.location_on, label: 'Registered addresses'),
-                  const _SettingsNavItem(icon: Icons.chat_bubble_outline, label: 'Contact us'),
+                  _SettingsNavItem(icon: Icons.language, label: 'the language',
+                    onTap: () {
+                      _openLanguageBottomSheet(context);
+                    },),
+                  const _SettingsNavItem(
+                      icon: Icons.lock_outline, label: 'change password'),
+                  const _SettingsNavItem(
+                      icon: Icons.phone, label: 'Change phone'),
+                  const _SettingsNavItem(
+                      icon: Icons.lock, label: 'Terms and Conditions'),
+                  const _SettingsNavItem(
+                      icon: Icons.location_on, label: 'Registered addresses'),
+                  const _SettingsNavItem(
+                      icon: Icons.chat_bubble_outline, label: 'Contact us'),
 
                   const SizedBox(height: 32),
 
@@ -99,6 +111,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _openLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) {
+        return LanguageBottomSheet(
+          //   selectedLanguage: 'English', // or get it from your app state
+          //   onLanguageChanged: (newLang) {
+          //     // Do something with the new language (e.g. save it to preferences)
+          //     print("Selected: $newLang");
+          //   },
+        );
+      },
     );
   }
 }
@@ -136,10 +166,12 @@ class _SettingsToggleItem extends StatelessWidget {
 class _SettingsNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
+  final VoidCallback? onTap;
 
   const _SettingsNavItem({
     required this.icon,
     required this.label,
+    this.onTap,
   });
 
   @override
@@ -148,9 +180,7 @@ class _SettingsNavItem extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: Icon(icon, color: Color(0xFF6C5DD3)),
       title: Text(label),
-      onTap: () {
-        // Handle navigation
-      },
+      onTap: onTap,
     );
   }
 }

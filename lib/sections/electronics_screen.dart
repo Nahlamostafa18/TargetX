@@ -57,7 +57,7 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => FavoritesScreen(favoriteItems: favoriteItems),
+                    builder: (_) => FavoritesScreen(),
                   ),
                 );
               },

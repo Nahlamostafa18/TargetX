@@ -26,7 +26,7 @@ class SectionsScreen extends StatelessWidget {
                 context,
                 title: "Electronics",
                 tags: ["Headphones", "Laptop", "Smart Watch"],
-                image: 'images/electronics.png',
+                image: 'assets/images/electronics.png',
                 onTap: () {
                   Navigator.push(
                     context,
@@ -39,7 +39,7 @@ class SectionsScreen extends StatelessWidget {
                 context,
                 title: "Clothes",
                 tags: ["Fabric", "Women", "Men", "Shoes"],
-                image: 'images/clothes.png',
+                image: 'assets/images/clothes.png',
                 onTap: () {
                   Navigator.push(
                     context,
@@ -52,7 +52,7 @@ class SectionsScreen extends StatelessWidget {
                 context,
                 title: "Home",
                 tags: ["Furniture", "Lights"],
-                image: 'images/home.png',
+                image: 'assets/images/home.png',
                 onTap: () {
                   Navigator.push(
                     context,
