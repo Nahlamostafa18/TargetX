@@ -1,26 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:targetx/notification/NotificationScreen.dart';
 
-class HomeHeaderWidget extends StatelessWidget {
+class HomeHeaderWidget extends StatefulWidget {
   const HomeHeaderWidget({super.key});
+
+  @override
+  State<HomeHeaderWidget> createState() => _HomeHeaderWidgetState();
+}
+
+class _HomeHeaderWidgetState extends State<HomeHeaderWidget> {
+  String _selectedCity = 'Elmansoura';
+
+  static const List<String> _cities = [
+    'Cairo',
+    'Giza',
+    'Alexandria',
+    'Luxor',
+    'Aswan',
+    'Hurghada',
+    'Sharm El Sheikh',
+  ];
+
+  void _showCitySheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+      ),
+      builder: (_) => ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        itemCount: _cities.length,
+        separatorBuilder: (_, __) => Divider(),
+        itemBuilder: (context, index) {
+          final city = _cities[index];
+          return ListTile(
+            title: Text(city),
+            onTap: () {
+              setState(() => _selectedCity = city);
+              Navigator.of(context).pop();
+            },
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Hello Ahmed',
+            const Text('Hello Ahmed',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4),
-            Row(
-              children: [
-                Icon(Icons.location_on_outlined, size: 16, color: Colors.grey),
-                SizedBox(width: 4),
-                Text('Elmansoura', style: TextStyle(color: Colors.blue)),
-                Icon(Icons.keyboard_arrow_down, size: 16, color: Colors.blue),
-              ],
+            const SizedBox(height: 4),
+            GestureDetector(
+              onTap: _showCitySheet,
+              child: Row(
+                children: [
+                  const Icon(Icons.location_on_outlined,
+                      size: 16, color: Colors.grey),
+                  const SizedBox(width: 4),
+                  Text(_selectedCity, style: TextStyle(color: Colors.blue)),
+                  const Icon(Icons.keyboard_arrow_down,
+                      size: 16, color: Colors.blue),
+                ],
+              ),
             ),
           ],
         ),
@@ -34,7 +81,15 @@ class HomeHeaderWidget extends StatelessWidget {
               ),
               child: IconButton(
                 icon: const Icon(Icons.notifications_none, color: Colors.white),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const NotificationsScreen(notifications: []),
+                    ),
+                  );
+                },
               ),
             ),
             Positioned(

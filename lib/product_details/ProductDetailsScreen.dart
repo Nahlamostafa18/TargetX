@@ -8,6 +8,7 @@ import 'package:targetx/product_details/widget/ImageCarousel.dart';
 import 'package:targetx/product_details/widget/QuantitySelectorWidget.dart';
 import 'package:targetx/product_details/widget/RatingSectionWidget.dart';
 
+import '../shared/widget/CustomButton.dart';
 import 'model/Product.dart';
 import 'model/Rating.dart';
 
@@ -88,36 +89,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         child: Row(
           children: [
             Expanded(
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF6C63FF), Color(0xFF413B99)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return const CartScreen();
-                        },
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Add To Cart',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+              child: CustomButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartScreen(),
                     ),
-                  ),
-                ),
+                  );
+                },
+                title: 'Add to Cart',
               ),
             ),
             const SizedBox(width: 16),

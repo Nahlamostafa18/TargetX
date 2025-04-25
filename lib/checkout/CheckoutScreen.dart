@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:targetx/checkout/widget/CartItemWidget.dart';
+import 'package:targetx/order_confirmation/OrderConfirmationScreen.dart';
+import 'package:targetx/shared/widget/CustomButton.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -91,79 +94,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.grey),
                       ),
-                      child: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
+                      child:
+                          const Icon(Icons.arrow_forward_ios_rounded, size: 14),
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
 
 // Product Info
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/images/camera.png', width: 80, height: 80),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-
-                              "Watch Series 10 GPS 46 mm Smartwatch",
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(height: 4),
-                            priceText(pricePerItem),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                quantity++;
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(Icons.add, size: 18),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text('$quantity'),
-                          const SizedBox(height: 4),
-                          GestureDetector(
-                            onTap: () {
-                              if (quantity > 1) {
-                                setState(() {
-                                  quantity--;
-                                });
-                              }
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(Icons.remove, size: 18),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                CartItemWidget(),
                 const SizedBox(height: 24),
 
 // Payment Method
@@ -183,9 +122,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                   child: Row(
                     children: const [
-                      FaIcon(FontAwesomeIcons.ccVisa, size: 40, color: Colors.blue),
+                      FaIcon(FontAwesomeIcons.ccVisa,
+                          size: 40, color: Colors.blue),
                       SizedBox(width: 16),
-                      Text("Jenius Card\n0274 7414 ***", style: TextStyle(fontSize: 14)),
+                      Text("Jenius Card\n0274 7414 ***",
+                          style: TextStyle(fontSize: 14)),
                       Spacer(),
                       Icon(Icons.arrow_forward_ios_rounded, size: 16),
                     ],
@@ -206,7 +147,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                       children: [
                         const Text("Shipping", style: TextStyle(fontSize: 16)),
                         summaryPriceText(shipping),
@@ -218,7 +158,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       children: [
                         const Text(
                           "Total",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         summaryPriceText(total, isTotal: true),
                       ],
@@ -238,18 +179,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     fillColor: Colors.white,
                   ),
                 ),
-// Directionality(
-// textDirection: TextDirection.rtl,
-// child: TextField(
-// decoration: InputDecoration(
-// hintText: "Location",
-// prefixIcon: const Icon(Icons.location_on_outlined),
-// border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-// filled: true,
-// fillColor: Colors.white,
-// ),
-// ),
-// ),
                 const SizedBox(height: 16),
 
 // Phone number
@@ -260,7 +189,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: "+20",
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16)),
                           filled: true,
                           fillColor: Colors.white,
                         ),
@@ -271,7 +201,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: "Phone number",
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16)),
                           filled: true,
                           fillColor: Colors.white,
                         ),
@@ -280,32 +211,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-
-// Coupon Code
                 TextField(
                   decoration: InputDecoration(
                     hintText: "Add a coupon code",
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16)),
                     filled: true,
                     fillColor: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 24),
-
-// Confirm Button
                 SizedBox(
                   width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-// action
-                    },
-                    child: const Text(
-                      "Confirm The Order",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
+                  child: CustomButton(
+                      title: "Confirm The Order",
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const OrderConfirmationScreen(),
+                          ),
+                        );
+                      }),
                 ),
+                const SizedBox(height: 24),
               ],
             ),
           ),

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class FavoriteSectionWidget extends StatelessWidget {
+/// Favorites section with selectable tabs
+class FavoriteSectionWidget extends StatefulWidget {
   const FavoriteSectionWidget({super.key});
 
   @override
+  _FavoriteSectionWidgetState createState() => _FavoriteSectionWidgetState();
+}
+
+class _FavoriteSectionWidgetState extends State<FavoriteSectionWidget> {
+  final List<String> tabs = ['All', 'Perfumes', 'Smart Watches', 'Clothes'];
+  int _selectedIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
-    final tabs = ['All', 'Perfumes', 'Smart Watches', 'Clothes'];
     return SizedBox(
       height: 40,
       child: ListView.separated(
@@ -17,8 +25,12 @@ class FavoriteSectionWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100)),
             label: Text(tabs[i]),
-            selected: i == 0,
-            onSelected: (_) {},
+            selected: _selectedIndex == i,
+            onSelected: (selected) {
+              setState(() {
+                _selectedIndex = i;
+              });
+            },
           );
         },
       ),

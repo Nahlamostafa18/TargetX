@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:targetx/checkout/CheckoutScreen.dart';
+import 'package:targetx/shared/widget/CustomButton.dart';
+
+import 'model/CartItem.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -47,8 +50,7 @@ class _CartScreenState extends State<CartScreen> {
       // If the cart is empty, show a message
       showDialog(
         context: context,
-        builder:
-            (context) => AlertDialog(
+        builder: (context) => AlertDialog(
           title: const Text('Empty Cart'),
           content: const Text(
             'Your cart is empty. Please add items to proceed.',
@@ -213,26 +215,12 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
           const SizedBox(height: 20),
-          GestureDetector(
-            onTap:
-            _handleCheckout, // When tapped, call _handleCheckout function
-            child: Container(
+          SizedBox(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  "Checkout",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
+              child: CustomButton(
+                title: "Checkout",
+                onPressed: _handleCheckout,
+              )),
         ],
       ),
     );
@@ -247,22 +235,4 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
-}
-
-
-// CartItem model for holding product data
-class CartItem {
-  final String image;
-  final String title;
-  final double price;
-  final double? oldPrice;
-  int quantity;
-
-  CartItem({
-    required this.image,
-    required this.title,
-    required this.price,
-    this.oldPrice,
-    this.quantity = 1,
-  });
 }

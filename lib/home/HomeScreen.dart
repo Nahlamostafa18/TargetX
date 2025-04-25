@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:targetx/home/widget/BestSellingWidget.dart';
-import 'package:targetx/home/widget/CoupinSectionWidget.dart';
+import 'package:targetx/home/widget/CouponsSectionWidget.dart';
 import 'package:targetx/home/widget/ExclusiveOffersWidget.dart';
 import 'package:targetx/home/widget/ExploreSectionsWidget.dart';
 import 'package:targetx/home/widget/FavoriteSectionWidget.dart';

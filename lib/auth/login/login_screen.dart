@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:targetx/layout/Layout_Screen.dart';
-
+import 'package:targetx/shared/widget/CustomButton.dart';
 
 import '../forgetpassword/forget_pass_screen.dart';
 import '../register/register_screen.dart';
-
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -22,7 +21,6 @@ class LoginScreen extends StatelessWidget {
           // fit: BoxFit.c,
         ),
       ),
-
       height: 150,
       width: 150,
       child: Scaffold(
@@ -128,36 +126,20 @@ class LoginScreen extends StatelessWidget {
                     containerWidth: 35,
                   ),
                   const SizedBox(height: 40),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      gradient: const LinearGradient(
-                        colors: [Colors.purple, Colors.blue],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        // home
+                    child: CustomButton(
+                      title: "Login",
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return  LayoutScreen();
+                              return LayoutScreen();
                             },
                           ),
                         );
                       },
-                      borderRadius: BorderRadius.circular(30),
-                      child: const Center(
-                        child: Text(
-                          "Login",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                      ),
                     ),
                   ),
                   const SizedBox(height: 15),
@@ -201,6 +183,7 @@ class SocialLoginButton extends StatelessWidget {
   final double width;
   final double containerWidth;
   final double containerHeight;
+
   const SocialLoginButton({
     super.key,
     required this.image,
