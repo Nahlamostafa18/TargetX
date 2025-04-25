@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:targetx/checkout/CheckoutScreen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -65,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const CheckoutPage(),
+          builder: (context) => const CheckoutScreen(),
         ), // Replace with your checkout page
       );
     }
@@ -248,20 +249,6 @@ class _CartScreenState extends State<CartScreen> {
   }
 }
 
-// Example of a Checkout Page (replace with your checkout flow)
-class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Checkout')),
-      body: const Center(
-        child: Text('Proceed to payment or other checkout details'),
-      ),
-    );
-  }
-}
 
 // CartItem model for holding product data
 class CartItem {
