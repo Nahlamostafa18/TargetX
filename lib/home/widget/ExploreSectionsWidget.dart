@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:targetx/sections/electronics_screen.dart';
 
 class ExploreSectionsWidget extends StatelessWidget {
   const ExploreSectionsWidget({super.key});
@@ -18,13 +19,24 @@ class ExploreSectionsWidget extends StatelessWidget {
         itemCount: items.length,
         separatorBuilder: (_, __) => const SizedBox(width: 16),
         itemBuilder: (context, i) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Stack(
-              children: [
-                Image.asset(items[i]['image']!,
-                    width: 300, height: 80, fit: BoxFit.cover),
-              ],
+          return GestureDetector(
+            onTap: () {
+              // Handle tap event
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const ElectronicsScreen(),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Stack(
+                children: [
+                  Image.asset(items[i]['image']!,
+                      width: 300, height: 80, fit: BoxFit.cover),
+                ],
+              ),
             ),
           );
         },
