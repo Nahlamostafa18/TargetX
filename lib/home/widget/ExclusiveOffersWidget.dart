@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:targetx/home/OffersScreen.dart';
 
 class ExclusiveOffersWidget extends StatelessWidget {
   const ExclusiveOffersWidget({super.key});
@@ -19,13 +20,24 @@ class ExclusiveOffersWidget extends StatelessWidget {
         itemCount: offers.length,
         separatorBuilder: (_, __) => const SizedBox(width: 16),
         itemBuilder: (context, i) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.asset(
-              offers[i],
-              width: 300,   // adjust per your design
-              height: 200,  // match the parent height
-              fit: BoxFit.cover,
+          return GestureDetector(
+            onTap: (){
+              // Handle tap event, e.g., navigate to a detailed view
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OffersScreen(),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                offers[i],
+                width: 300,   // adjust per your design
+                height: 200,  // match the parent height
+                fit: BoxFit.cover,
+              ),
             ),
           );
         },

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:targetx/edit_profile/EditProfileScreen.dart';
 
+import '../help/HelpScreen.dart';
+import '../help/Terms.dart';
+import '../order_history/OrderHistoryScreen.dart';
 import '../settings/SettingsScreen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -97,7 +101,9 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const EditProfileScreen(initialName: "Omar Ali", initialPhone: "1234123123"),
+                        builder: (context) => const EditProfileScreen(
+                            initialName: "Omar Ali",
+                            initialPhone: "1234123123"),
                       ),
                     );
                   },
@@ -141,18 +147,54 @@ class ProfileScreen extends StatelessWidget {
                         },
                       ),
                       _ProfileItem(
-                          icon: Icons.person_add_alt, text: 'Invite a friend'),
+                        icon: Icons.person_add_alt,
+                        text: 'Invite a friend',
+                        onTap: _inviteFriend,
+                      ),
                       _ProfileItem(
-                          icon: Icons.description_outlined,
-                          text: 'Terms and Conditions'),
+                        icon: Icons.description_outlined,
+                        text: 'Terms and Conditions',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const TermsAndConditionsScreen(),
+                              ));
+                        },
+                      ),
                       _ProfileItem(
-                          icon: Icons.help_outline, text: 'Need help!'),
+                        icon: Icons.help_outline,
+                        text: 'Need help!',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HelpScreen(),
+                              ));
+                        },
+                      ),
                       _ProfileItem(
-                          icon: Icons.chat_bubble_outline,
-                          text: 'Frequently asked questions'),
+                        icon: Icons.chat_bubble_outline,
+                        text: 'Frequently asked questions',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const FAQPage(),
+                              ));
+                        },
+                      ),
                       _ProfileItem(
-                          icon: Icons.assignment_ind_outlined,
-                          text: 'Your requests'),
+                        icon: Icons.assignment_ind_outlined,
+                        text: 'Your requests',
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => OrderHistoryScreen()),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 )
@@ -164,6 +206,13 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _inviteFriend() {
+    const url =
+        'https://play.google.com/store/apps/details?id=com.example.targetx';
+    SharePlus.instance
+        .share(ShareParams(text: 'Check out TargetX on Google Play: $url'));
   }
 }
 
@@ -192,5 +241,3 @@ class _ProfileItem extends StatelessWidget {
     );
   }
 }
-
-

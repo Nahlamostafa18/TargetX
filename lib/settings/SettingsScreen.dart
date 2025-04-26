@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:targetx/contact/ContanctServiceScreen.dart';
 
+import '../help/Terms.dart';
 import '../profile/LanguageBottomSheet.dart';
+import 'ChangePasswordBottomSheet.dart';
+import 'ChangePhoneBottomSheet.dart';
+import 'LogoutBottomSheet.dart';
+import 'RegisteredAddressesScreen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -37,8 +43,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   CircleAvatar(
                     radius: 20,
                     backgroundColor: Colors.grey.shade200,
-                    child: const Icon(
-                        Icons.arrow_forward_ios, color: Colors.black),
+                    child: const Icon(Icons.arrow_forward_ios,
+                        color: Colors.black),
                   ),
                 ],
               ),
@@ -68,28 +74,60 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const SizedBox(height: 12),
 
                   // Navigation items
-                  _SettingsNavItem(icon: Icons.language, label: 'the language',
+                  _SettingsNavItem(
+                    icon: Icons.language,
+                    label: 'the language',
                     onTap: () {
                       _openLanguageBottomSheet(context);
-                    },),
-                  const _SettingsNavItem(
-                      icon: Icons.lock_outline, label: 'change password'),
-                  const _SettingsNavItem(
-                      icon: Icons.phone, label: 'Change phone'),
-                  const _SettingsNavItem(
-                      icon: Icons.lock, label: 'Terms and Conditions'),
-                  const _SettingsNavItem(
-                      icon: Icons.location_on, label: 'Registered addresses'),
-                  const _SettingsNavItem(
-                      icon: Icons.chat_bubble_outline, label: 'Contact us'),
+                    },
+                  ),
+                  _SettingsNavItem(
+                    icon: Icons.lock_outline,
+                    label: 'change password',
+                    onTap: _showChangePasswordSheet,
+                  ),
+                  _SettingsNavItem(
+                    icon: Icons.phone,
+                    label: 'Change phone',
+                    onTap: _showChangePhoneSheet,
+                  ),
+                  _SettingsNavItem(
+                    icon: Icons.lock,
+                    label: 'Terms and Conditions',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const TermsAndConditionsScreen(),
+                          ));
+                    },
+                  ),
+                  _SettingsNavItem(
+                    icon: Icons.location_on,
+                    label: 'Registered addresses',
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const RegisteredAddressesScreen()));
+                    },
+                  ),
+                  _SettingsNavItem(
+                    icon: Icons.chat_bubble_outline,
+                    label: 'Contact us',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ContactServiceScreen(),
+                          ));
+                    },
+                  ),
 
                   const SizedBox(height: 32),
 
                   // Log out
                   GestureDetector(
-                    onTap: () {
-                      // Handle log out
-                    },
+                    onTap: _showLogoutSheet,
                     child: Row(
                       children: const [
                         Icon(Icons.logout, color: Colors.red),
@@ -122,13 +160,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       builder: (_) {
         return LanguageBottomSheet(
-          //   selectedLanguage: 'English', // or get it from your app state
-          //   onLanguageChanged: (newLang) {
-          //     // Do something with the new language (e.g. save it to preferences)
-          //     print("Selected: $newLang");
-          //   },
-        );
+            //   selectedLanguage: 'English', // or get it from your app state
+            //   onLanguageChanged: (newLang) {
+            //     // Do something with the new language (e.g. save it to preferences)
+            //     print("Selected: $newLang");
+            //   },
+            );
       },
+    );
+  }
+
+  void _showLogoutSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) => const LogoutBottomSheet(),
+    );
+  }
+
+  void _showChangePhoneSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) => const ChangePhoneBottomSheet(),
+    );
+  }
+
+  void _showChangePasswordSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) => const ChangePasswordBottomSheet(),
     );
   }
 }
