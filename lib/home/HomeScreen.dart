@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:targetx/chatbot/ChatBotScreen.dart';
 import 'package:targetx/home/widget/BestSellingWidget.dart';
 import 'package:targetx/home/widget/CouponsSectionWidget.dart';
 import 'package:targetx/home/widget/ExclusiveOffersWidget.dart';
@@ -17,6 +18,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const ChatBotScreen(),
+            ),
+          );
+        },
+        backgroundColor: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset("assets/images/ic_chat_bot.png"),
+        ),
+
+      ),
       body: Stack(
         children: [
           Positioned(
